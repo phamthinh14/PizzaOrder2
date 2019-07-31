@@ -1,11 +1,17 @@
 package com.example.demo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 public class PizzaOrder {
@@ -22,6 +28,8 @@ public class PizzaOrder {
     //    @NotNull
 //    @Size(min = 3)
     private boolean redSauce;
+
+    private String time;
 
     private double price;
 
@@ -74,5 +82,17 @@ public class PizzaOrder {
     public void setPrice(double price) {
         this.price = price;
 
+    }
+
+    public String getTime() {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MINUTE, 50);
+        time = String.valueOf(calendar.getTime());
+        return "Your Pizza will be ready at " + time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
